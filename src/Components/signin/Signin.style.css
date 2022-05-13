@@ -1,0 +1,22 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+
+}
+
+.signin{
+    margin-top: 80px;
+    padding: 20px;
+}
+.input-text{
+   
+    
+        margin: 11px;
+        padding: 3px;
+        box-sizing: border-box;
+        color: chocolate;
+        background-color: pink;
+    
+}
+
