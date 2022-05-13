@@ -3,35 +3,19 @@ import './Signup.style.css'
 import axios from 'axios';
 // import  Link  from 'react-router-dom';
 
-function Signup() {
-    const [data, setData] = useState({
-        username: "",
-        email: "",
-        adress: "",
-        password: "",
-        confirmPassword: '',
+const Signup =() => {
+    const [data, setData] = useState({})
 
-
-    })
-
-    const { username, password, email, adress, confirmPassword } = data;
-
-    const changeHandler = e => {
-        setData({ ...data, [e.target.name]: [e.target.value] });
+    const changeHandler = (event) => {
+        const {name,value} = event.target
+        setData({...data,[name]:value});
     }
 
-    const signupHandler = e => {
-        e.preventDefault();
+    const signupHandler = () => {
+        // e.preventDefault();
         // console.log(data)
-        axios.post('http://localhost:8080/api/users/register', {
-            username: username,
-            email: email,
-            adress: adress,
-            password: password,
-            confirmPassword: confirmPassword
-           
-        })
-        .then(res => console.log(res))
+        axios.post('http://localhost:8080/api/users/register', data)
+        .then(res => console.log(res.data))
         .catch(err => console.log(err));
     }
     return (
@@ -40,14 +24,14 @@ function Signup() {
                 <div className='input-text'>
                     <p>SIGN-UP FROM</p>
                     
-                    <form onSubmit={signupHandler}>
+                    <form >
 
-                        <input type="text" name="username" placeholder="UserName" value={username} onChange={changeHandler} /><br />
-                        <input type="email" name="email" placeholder="UserEmail" value={email} onChange={changeHandler} /><br />
-                        <input type="text" name="adress" placeholder="UserAddress" value={adress} onChange={changeHandler} /><br />
-                        <input type="password" name="password" placeholder="UserPassword" value={password} onChange={changeHandler} /><br />
-                        <input type="password" name="confirmPassword" placeholder="ConfrimPassword" value={confirmPassword} onChange={changeHandler} /><br />
-                        <button>signup</button>
+                        <input type="text" name="username" placeholder="UserName"  onChange={changeHandler} /><br />
+                        <input type="email" name="email" placeholder="UserEmail" onChange={changeHandler} /><br />
+                        <input type="text" name="adress" placeholder="UserAddress"  onChange={changeHandler} /><br />
+                        <input type="password" name="password" placeholder="UserPassword" onChange={changeHandler} /><br />
+                        <input type="password" name="confirmPassword" placeholder="ConfrimPassword" onChange={changeHandler} /><br />
+                        <button onClick={signupHandler}>signup</button>
                         
                     </form>
                 </div>

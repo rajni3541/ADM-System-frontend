@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import signin from './Signin.style.css'
+import axios from 'axios'
 
-function Signin() {
+const SignIn =()=> {
     const [data, setData] = useState({
         username: "",
         email: "",
@@ -13,15 +14,19 @@ function Signin() {
 
     })
 
-    const { username, password, email, adress } = data;
+    // const { username, password, email, adress } = data;
 
-    const changeHandler = e => {
-        setData({ ...data, [e.target.name]: [e.target.value] });
+    const changeHandler = (event) => {
+        const {name,value} = event.target
+        setData({ ...data, [name]: value });
     }
 
     const signinHandler = e => {
-        e.preventDefault();
-        console.log(data);
+        // e.preventDefault();
+        axios.post('http://localhost:8080/api/users/register', data)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err));
+        // console.log(data);
     }
     return (
         <div className='signin'>
@@ -30,13 +35,13 @@ function Signin() {
                     <h1>ADMIN DASHBOARD MANAGEMENT SYSTEM</h1>
                     <p>SIGN-IN FROM</p>
                     
-                    <form onsignin={signinHandler}>
+                    <form >
 
-                        <input type="text" name="username" placeholder="UserName" value={username} onChange={changeHandler} /><br />
-                        <input type="email" name="email" placeholder="UserEmail" value={email} onChange={changeHandler} /><br />
-                        <input type="text" name="adress" placeholder="UserAdress" value={adress} onChange={changeHandler} /><br />
-                        <input type="password" name="password" placeholder="UserPassword" value={password} onChange={changeHandler} /><br />
-                        <button>signin</button>
+                        <input type="text" name="username" placeholder="UserName"  onChange={changeHandler} /><br />
+                        <input type="email" name="email" placeholder="UserEmail" onChange={changeHandler} /><br />
+                        <input type="text" name="adress" placeholder="UserAdress"  onChange={changeHandler} /><br />
+                        <input type="password" name="password" placeholder="UserPassword"  onChange={changeHandler} /><br />
+                        <button onClick={signinHandler}>signin</button>
                         <p>Don't have an account? <Link to="/signup">Signup</Link></p>
                     </form>
                 </div>
@@ -46,4 +51,4 @@ function Signin() {
 
     );
 }
-export default Signin   
+export default SignIn   
