@@ -11,10 +11,10 @@ const Signup =() => {
         setData({...data,[name]:value});
     }
 
-    const signupHandler = () => {
+    const signupHandler = async () => {
         // e.preventDefault();
         // console.log(data)
-        axios.post('http://localhost:8080/api/users/register', data)
+        axios.post('https://admsystem-backend.vercel.app/api/user/register', data)
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
     }

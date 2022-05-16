@@ -23,7 +23,7 @@ const SignIn =()=> {
 
     const signinHandler = e => {
         // e.preventDefault();
-        axios.post('http://localhost:8080/api/users/register', data)
+        axios.post("https://login-backend.vercel.app/api/user/signin", data)
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
         // console.log(data);
@@ -52,3 +52,6 @@ const SignIn =()=> {
     );
 }
 export default SignIn   
+
+
+
