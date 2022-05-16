@@ -22,8 +22,11 @@ const SignIn =()=> {
     }
 
     const signinHandler = e => {
-        // e.preventDefault();
-        axios.post("https://login-backend.vercel.app/api/user/signin", data)
+        e.preventDefault();
+        axios.post("https://login-backend.vercel.app/app/user/signin", {
+            email: data.email,
+            password: data.password
+        })
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
         // console.log(data);
@@ -37,9 +40,9 @@ const SignIn =()=> {
                     
                     <form >
 
-                        <input type="text" name="username" placeholder="UserName"  onChange={changeHandler} /><br />
+                        {/* <input type="text" name="username" placeholder="UserName"  onChange={changeHandler} /><br /> */}
                         <input type="email" name="email" placeholder="UserEmail" onChange={changeHandler} /><br />
-                        <input type="text" name="adress" placeholder="UserAdress"  onChange={changeHandler} /><br />
+                        {/* <input type="text" name="adress" placeholder="UserAdress"  onChange={changeHandler} /><br /> */}
                         <input type="password" name="password" placeholder="UserPassword"  onChange={changeHandler} /><br />
                         <button onClick={signinHandler}>signin</button>
                         <p>Don't have an account? <Link to="/signup">Signup</Link></p>
